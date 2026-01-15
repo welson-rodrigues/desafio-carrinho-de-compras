@@ -14,7 +14,7 @@ import { router } from "expo-router";
 
 
 export default function Home() {
-  const { cart } = useContext(CartContext);
+  const { cart, addItemCart } = useContext(CartContext);
 
   const [products, setProducts] = useState( [
 
@@ -50,6 +50,10 @@ export default function Home() {
   },
 ]);
 
+  function addCart(item: any) {
+    addItemCart(item)
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.cartContent}>
@@ -66,7 +70,7 @@ export default function Home() {
         style={styles.list}
         data={products}
         keyExtractor={ (item) => String(item.id) }
-        renderItem={ ({ item }) => <Produtos data={item} />} // aqui passa o item, pois tudo ja esta dentro do useState
+        renderItem={ ({ item }) => <Produtos data={item} addToCart={ () => addCart(item)} />} // aqui passa o item, pois tudo ja esta dentro do useState
       />
     </SafeAreaView>
   );

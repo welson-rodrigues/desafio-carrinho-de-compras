@@ -8,9 +8,11 @@ interface ProdutosProps {
     price: number;
     quatity: number;
   }
+  addToCart: () => void; // quando chama uma função
 }
 
-export default function Produtos( { data }: ProdutosProps) {
+
+export default function Produtos( { data, addToCart }: ProdutosProps) {
     return (
         <View style={styles.container}>
             <View>
@@ -18,7 +20,7 @@ export default function Produtos( { data }: ProdutosProps) {
                 <Text style={styles.price}>R$ {data.price}</Text>
                 {/* <Text style={styles.quatity}>{data.quatity}</Text> */}
             </View>
-            <TouchableOpacity style={styles.buttomAdd}>
+            <TouchableOpacity style={styles.buttomAdd} onPress={addToCart}>
                 <Text style={styles.buttomText}>+</Text>
             </TouchableOpacity>
         </View>
