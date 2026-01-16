@@ -12,6 +12,7 @@ interface ProductProps {
 interface CartContextData {
     cart: ProductProps[];
     addItemCart: (newItem: ProductProps) => void;
+    removeItemCart: (product: ProductProps) => void;
 }
 
 interface CartProviderProps {
@@ -44,9 +45,29 @@ function CartProvider({ children }: CartProviderProps) {
             total: newItem.price
         }
 
-        setCart(producs => [...producs, data])
-        console.log(...cart, data)
+         setCart(producs => [...producs, data])
+         //console.log(...cart, data)
 
+    }
+
+    function removeItemCart(producs: ProductProps) {
+        const indexItem = cart.findIndex(item => item.id === producs.id)
+
+        // Conforme for clicando vai aumentado os produtos
+        if(cart[indexItem]?.amount > 1) {
+            let cartList = cart;
+
+            cartList[indexItem].amount = cartList[indexItem].amount - 1;
+
+            cartList[indexItem].total =  cartList[indexItem].total - cartList[indexItem].price;
+
+            setCart(cartList);
+            return;
+        }
+
+        // Se for menor que 1 ele remove
+        const removeItem = cart.filter(item => item.id !== producs.id);
+        setCart(removeItem); // removendo o item
     }
 
     return (
@@ -54,6 +75,7 @@ function CartProvider({ children }: CartProviderProps) {
             value={{
                 cart,
                 addItemCart,
+                removeItemCart
             }}
         >
             {children}
