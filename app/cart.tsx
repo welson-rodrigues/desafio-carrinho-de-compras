@@ -4,7 +4,7 @@ import { CartContext } from "@/app/context/cartContext"
 import CartItem from "@/components/cartItem";
 
 export default function Cart() {
-    const { cart, addItemCart, removeItemCart } = useContext(CartContext);
+    const { cart, addItemCart, removeItemCart, total } = useContext(CartContext);
     return (
         <View style={styles.container}>
             <FlatList
@@ -19,6 +19,8 @@ export default function Cart() {
                         removeAmount={ () => removeItemCart(item) }
                     />
                 )}
+                // Renderizar o ultimo item da lista
+                ListFooterComponent={ () => <Text style={styles.total}>Total R$ {total.toFixed(2)}</Text> }
             />
         </View>
     );
@@ -32,5 +34,11 @@ const styles = StyleSheet.create({
         paddingLeft: 14,
         paddingRight: 14,
         paddingTop: 14,
+    },
+
+    total: {
+        fontSize: 18,
+        fontWeight: "bold",
+        marginBottom: 24
     }
 })

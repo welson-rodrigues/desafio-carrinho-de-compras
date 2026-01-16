@@ -59,9 +59,14 @@ export default function Home() {
       <View style={styles.cartContent}>
         <Text style={styles.title}>Lista de produtos</Text>
         <TouchableOpacity style={styles.cartButtom} onPress={ () => router.push("/cart")}>
-          <View style={styles.dot}>
-            <Text style={styles.dotText}>{cart?.length}</Text>
-          </View>
+
+          {/* Se for maior que 1 mostra a bolinha vermelha, senão nao mostra nada */}
+          {cart.length >= 1 && (
+            <View style={styles.dot}>
+              <Text style={styles.dotText}>{cart?.length}</Text>
+            </View>
+          )}
+
           <Feather name="shopping-cart" size={30} color={"#000000"}/>
         </TouchableOpacity>
       </View>
