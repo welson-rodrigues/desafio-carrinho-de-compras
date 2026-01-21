@@ -60,7 +60,7 @@ export default function Home() {
         <Text style={styles.title}>Lista de produtos</Text>
         <TouchableOpacity style={styles.cartButtom} onPress={ () => router.push("/cart")}>
 
-          {/* Se for maior que 1 mostra a bolinha vermelha, senão nao mostra nada */}
+          {/* Se for maior que 1 mostra a bolinha vermelha, senão nao mostra nada. */}
           {cart.length >= 1 && (
             <View style={styles.dot}>
               <Text style={styles.dotText}>{cart?.length}</Text>
